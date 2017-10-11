@@ -1,9 +1,10 @@
 # botulizer
 
+```
 Scans specified log files for bots, crawlers, and spiders and prints a histogram
 bar             | =========================== [27]
 foo             | =============== [15]
-
+```
 
 Script that takes a log file as an argument and produces a histogram
 args: logfile divisor(int) default is 3
