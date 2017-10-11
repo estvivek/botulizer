@@ -65,21 +65,23 @@ def startscan(logfile, divisor, wordlist):
 # get number of arguments and go something depending on how many we get
 if len(sys.argv) >3:
 	usage()
-	exit
+	sys.exit()
 elif len(sys.argv) == 1:
 	usage()
-	exit
+	sys.exit()
 elif len(sys.argv) == 3:
 	logfile = sys.argv[1]
 	try:
 		divisor = int(sys.argv[2])
 	except:
 		print "Something went wrong, the divisor specified wasnt a valid integer.\n"
+		sys.exit()
 	# fail safe
 	if isSafe(logfile, divisor):
 		startscan(logfile, divisor, wordlist)
 	else:
 		print "Something went wrong, the logfile specified  doesnt exist.\n"
+		sys.exit()
 elif len(sys.argv) == 2:
 	logfile = sys.argv[1]
 	# fail safe
@@ -87,3 +89,4 @@ elif len(sys.argv) == 2:
 		startscan(logfile, divisor, wordlist)
 	else:
 		print "Something went wrong, the logfile specified doesnt exist.\n"
+		sys.exit()
