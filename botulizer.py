@@ -71,16 +71,19 @@ elif len(sys.argv) == 1:
 	exit
 elif len(sys.argv) == 3:
 	logfile = sys.argv[1]
-	divisor = int(sys.argv[2])
+	try:
+		divisor = int(sys.argv[2])
+	except:
+		print "Something went wrong, the divisor specified wasnt a valid integer.\n"
 	# fail safe
 	if isSafe(logfile, divisor):
 		startscan(logfile, divisor, wordlist)
 	else:
-		print "Something went wrong, either the file doesnt exist or the divisor wasnt a valid integer.\n"
+		print "Something went wrong, the logfile specified  doesnt exist.\n"
 elif len(sys.argv) == 2:
 	logfile = sys.argv[1]
 	# fail safe
 	if isSafe(logfile, divisor):
 		startscan(logfile, divisor, wordlist)
 	else:
-		print "Something went wrong, either the file doesnt exist or the divisor wasnt a valid integer.\n"
+		print "Something went wrong, the logfile specified doesnt exist.\n"
