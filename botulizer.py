@@ -44,7 +44,9 @@ def sanitize(botdic):
 	for k in botdic.keys():
 		for pattern in banlist:
 			if pattern in k:
-				del botdic[k]	 
+				# failsafe, first check if key exists, then delete
+				if k in botdic:
+					del botdic[k]	 
 
 # fail safe function check variables for legitimacy
 def isSafe(f, i):
