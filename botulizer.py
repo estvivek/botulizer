@@ -69,10 +69,15 @@ elif len(sys.argv) > 2:
 else:
 	divisor  = sys.argv[1]
 	# fail safe
+	if divisor == "0":
+		print "Something went wrong, the divisor specified wasnt a valid integer."
+		print "The divisor specified cannot be zero.\n"
+		sys.exit()
+		
 	try:
 		divisor = int(sys.argv[1])
 	except:
-		print "Something went wrong, the divisor specified wasnt a valid integer.\n"
-		print "Divisor:", divisor
+		print "Something went wrong, the divisor specified wasnt a valid integer."
+		print "Divisor:", divisor, "\n"
 		sys.exit()
 	startscan(divisor, wordlist)
