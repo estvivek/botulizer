@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# Script that takes a log file as an argument and produces a histogram
-# args: logfile divisor(int) default is 3
+# Script that takes logdata from stdin an argument and produces a histogram
+# args: divisor(int) default is 3
 #
 # notes on divisor
 # the divisor is used to prettify the histogram in order to make it fit on the page,
@@ -49,44 +49,30 @@ def isSafe(f, i):
 		return True
 
 # main function where all the partying happens
-def startscan(logfile, divisor, wordlist):
-	print "Scan started on file :", logfile
-	print "Please wait...."
-	with open(logfile) as f:
-		for line in f:
-			line = line.strip()
-			for word in line.split():
-				for pattern in wordlist:
-					if pattern in word:
-						botdic.setdefault(word, 0)
-						botdic[word] = botdic[word] + 1 
+def startscan(divisor, wordlist):
+	print "Scan started, please wait...."
+	for line in sys.stdin:
+		line = line.strip()
+		for word in line.split():
+			for pattern in wordlist:
+				if pattern in word:
+					botdic.setdefault(word, 0)
+					botdic[word] = botdic[word] + 1
 	graphify(botdic)
 
 # get number of arguments and go something depending on how many we get
-if len(sys.argv) >3:
+if len(sys.argv) == 1:
+	startscan(divisor, wordlist)
+elif len(sys.argv) > 2:
 	usage()
 	sys.exit()
-elif len(sys.argv) == 1:
-	usage()
-	sys.exit()
-elif len(sys.argv) == 3:
-	logfile = sys.argv[1]
+else:
+	divisor  = sys.argv[1]
+	# fail safe
 	try:
-		divisor = int(sys.argv[2])
+		divisor = int(sys.argv[1])
 	except:
 		print "Something went wrong, the divisor specified wasnt a valid integer.\n"
+		print "Divisor:", divisor
 		sys.exit()
-	# fail safe
-	if isSafe(logfile, divisor):
-		startscan(logfile, divisor, wordlist)
-	else:
-		print "Something went wrong, the logfile specified  doesnt exist.\n"
-		sys.exit()
-elif len(sys.argv) == 2:
-	logfile = sys.argv[1]
-	# fail safe
-	if isSafe(logfile, divisor):
-		startscan(logfile, divisor, wordlist)
-	else:
-		print "Something went wrong, the logfile specified doesnt exist.\n"
-		sys.exit()
+	startscan(divisor, wordlist)
