@@ -1,7 +1,7 @@
 # botulizer
 
 ```
-Scans specified log files for bots, crawlers, and spiders and prints a histogram
+Scans STDIN (typically piped access log files) for bots, crawlers, and spiders and prints a histogram
 bar             | =========================== [27]
 foo             | =============== [15]
 ```
