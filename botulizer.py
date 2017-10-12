@@ -35,6 +35,16 @@ def graphify(botdic):
 	for k in sorted(botdic, key=botdic.get, reverse=True):
 		print "%-15s %s %s [%s]" % (k, "|", "=" * (botdic[k] / divisor), botdic[k])
 
+def sanitize(botdic):
+	banlist = ["robots.txt", "Robots.txt", "ROBOTS.TXT",
+		"bottom", "Bottom", "BOTTOM",
+		"botany", "Botany", "BOTANY",
+		"both", "Both, BOTH",
+		"https", "http"]
+	for k in botdic.keys():
+		for pattern in banlist:
+			if pattern in k:
+				del botdic[k]	 
 
 # fail safe function check variables for legitimacy
 def isSafe(f, i):
@@ -58,6 +68,7 @@ def startscan(divisor, wordlist):
 				if pattern in word:
 					botdic.setdefault(word, 0)
 					botdic[word] = botdic[word] + 1
+	sanitize(botdic)
 	graphify(botdic)
 
 # get number of arguments and go something depending on how many we get
