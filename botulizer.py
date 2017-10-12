@@ -33,7 +33,7 @@ foo             | =============== [15]
 
 def graphify(botdic):
 	for k in sorted(botdic, key=botdic.get, reverse=True):
-		print "%-15s %s %s [%s]" % (k, "|", "=" * (botdic[k] / divisor), botdic[k])
+		print "%-30s %s %s [%s]" % (k, "|", "=" * (botdic[k] / divisor), botdic[k])
 
 def sanitize(botdic):
 	banlist = ["robots.txt", "Robots.txt", "ROBOTS.TXT",
